@@ -231,6 +231,11 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 
 
 - (void)tap:(UITapGestureRecognizer *)t {
+    
+    if ([self.signaturedelegate respondsToSelector:@selector(signatureBegin)]) {
+        [self.signaturedelegate signatureBegin];
+    }
+    
     CGPoint l = [t locationInView:self];
     
     if (t.state == UIGestureRecognizerStateRecognized) {
@@ -277,6 +282,10 @@ static PPSSignaturePoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVect
 }
 
 - (void)pan:(UIPanGestureRecognizer *)p {
+    
+    if ([self.signaturedelegate respondsToSelector:@selector(signatureBegin)]) {
+        [self.signaturedelegate signatureBegin];
+    }
     
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
     
